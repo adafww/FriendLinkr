@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-//import { loginUser } from '../redux/actions/authActions';
+import axios from 'axios';
 
 const Login = () => {
-//   const dispatch = useDispatch();
+  const API_HOST = process.env.REACT_APP_API_HOST;
+  const API_PORT = process.env.REACT_APP_API_PORT;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // dispatch(loginUser({ email, password }));
+    try {
+      const response = await axios.post('http://localhost:8086/api/v1/auth/login', { email, password });
+      console.log(response.data); // здесь можно обработать ответ от бэкэнда
+    } catch (error) {
+      console.error(error); // здесь можно обработать ошибку
+    }
   };
 
-  const isLoggedIn = true; // проверка, залогинен ли пользователь
+  const isLoggedIn = false; // проверка, залогинен ли пользователь
 
   if (isLoggedIn) {
     return <Navigate to="/" />;
