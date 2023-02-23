@@ -1,0 +1,16 @@
+footer {
+    background-color: #f2f2f2;
+    padding: 24px;
+    text-align: center;
+}
+
+footer p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #777;
+}
+
+footer p:first-of-type {
+    font-weight: 500;
+    color: #333;
+}
