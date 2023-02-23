@@ -7,20 +7,24 @@ const Login = () => {
   const API_PORT = process.env.REACT_APP_API_PORT;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isRedirect, setIsRedirect] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8086/api/v1/auth/login', { email, password });
+      const response = await axios.post('http://' + API_HOST + ':' + 
+      + API_PORT + '/api/v1/auth/login', { email, password });
+      localStorage.setItem('token', response.data.data.token);
+      if (response.status == 200) {
+        setIsRedirect(true);
+      }
       console.log(response.data); // здесь можно обработать ответ от бэкэнда
     } catch (error) {
       console.error(error); // здесь можно обработать ошибку
     }
   };
 
-  const isLoggedIn = false; // проверка, залогинен ли пользователь
-
-  if (isLoggedIn) {
+  if (isRedirect) {
     return <Navigate to="/" />;
   }
 

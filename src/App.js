@@ -6,12 +6,12 @@ import Footer from "./components/footer/Footer";
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/UserWall';
-import Logout from './pages/UserProfile';
+import Logout from './pages/Logout';
 
 function App() {
   return (
     <div className="App">
-      <Header isLoggedIn={false} />
+      <Header isLoggedIn={localStorage.getItem('token')} />
             <main className="main-content">
                 <Routes>
                     <Route path="/" element={<Home />} />
