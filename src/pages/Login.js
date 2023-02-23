@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const API_HOST = process.env.REACT_APP_API_HOST;
   const API_PORT = process.env.REACT_APP_API_PORT;
   const [email, setEmail] = useState('');
@@ -10,12 +10,13 @@ const Login = () => {
   const [isRedirect, setIsRedirect] = useState(false);
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     try {
       const response = await axios.post('http://' + API_HOST + ':' + 
       + API_PORT + '/api/v1/auth/login', { email, password });
       localStorage.setItem('token', response.data.data.token);
-      if (response.status == 200) {
+      if (response.status === 200) {
         setIsRedirect(true);
       }
       console.log(response.data); // здесь можно обработать ответ от бэкэнда
@@ -25,6 +26,7 @@ const Login = () => {
   };
 
   if (isRedirect) {
+    onLogin();
     return <Navigate to="/" />;
   }
 
