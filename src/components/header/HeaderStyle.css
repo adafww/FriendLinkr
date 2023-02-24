@@ -4,12 +4,14 @@ header {
     align-items: center;
     height: 60px;
     padding-left: 24px;
+    padding-right: 24px;
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 nav {
     display: flex;
+    width: 100%;
 }
 
 nav a {
@@ -30,4 +32,8 @@ nav a:hover {
 nav a.active {
     background-color: #999;
     color: #fff;
+}
+
+.header_register {
+    margin-left: auto;
 }

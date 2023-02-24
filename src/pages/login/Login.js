@@ -17,17 +17,17 @@ const Login = ({ onLogin }) => {
       const response = await axios.post('http://' + API_HOST + ':' + 
       + API_PORT + '/api/v1/auth/login', { email, password });
       localStorage.setItem('token', response.data.data.token);
+      localStorage.setItem('username', response.data.data.first_name);
       if (response.status === 200) {
+        onLogin();
         setIsRedirect(true);
       }
-      console.log(response.data); // здесь можно обработать ответ от бэкэнда
     } catch (error) {
       console.error(error); // здесь можно обработать ошибку
     }
   };
 
   if (isRedirect) {
-    onLogin();
     return <Navigate to="/" />;
   }
 

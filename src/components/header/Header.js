@@ -8,7 +8,12 @@ const Header = ({ isLoggedIn, onLogout }) => {
             <nav>
                 <Link to="/">Home</Link>
                 {isLoggedIn ? (
-                    <Link to="/logout" onClick={onLogout}>Logout</Link>
+                    <>
+                        <Link to="/logout" onClick={onLogout}>Logout</Link>
+                        <Link to="/profile" className='header_register'>
+                            {localStorage.getItem('username')}
+                        </Link>
+                    </>
                 ) : (
                     <>
                         <Link to="/login">Login</Link>
