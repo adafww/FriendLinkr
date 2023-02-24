@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Profile = () => {
-    const username = localStorage.getItem('username');
+    const [userData, setUserData] = useState();
 
     const getHeaders = () => {
         const token = localStorage.getItem('token');
@@ -16,7 +16,7 @@ const Profile = () => {
                     `http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/api/v1/users/me`,
                     { headers: getHeaders() }
                 );
-                console.log(response.data);
+                setUserData(response.data.data);
             } catch (error) {
                 console.error(error);
             }
@@ -25,10 +25,26 @@ const Profile = () => {
     }, []);
 
     return (
-        <div>
-            <h2>Профиль пользователя {username}</h2>
-            <p>Здесь можно отобразить дополнительную информацию о пользователе.</p>
-        </div>
+        <>
+            {userData ? (
+                <div className="profile-container">
+                    <h2 className="profile-header">Профиль пользователя {userData.first_name}</h2>
+                    <div className="user-info">
+                        <img src={'userData.photo'} alt="User avatar" className="user-avatar" />
+                        <div className="user-details">
+                            <p>Имя: {userData.first_name}</p>
+                            <p>Фамилия: {userData.last_name}</p>
+                            <p>E-mail: {userData.email}</p>
+                            <p>Дата регистрации: {new Date(userData.reg_date).toLocaleDateString()}</p>
+                        </div>
+                    </div>
+                </div>
+
+            ) : (
+                <>Loading</>
+            )}
+        </>
+
     );
 };
 
