@@ -5,7 +5,7 @@ import Header from './components/header/Header';
 import Footer from "./components/footer/Footer";
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Register from './pages/Register';
+import Register from './pages/register/Register';
 import Logout from './pages/Logout';
 
 function App() {

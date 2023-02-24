@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
+import './RegisterStyle.css';
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -13,23 +14,24 @@ const Register = () => {
     const [image, setImage] = useState();
     const [isRedirect, setIsRedirect] = useState(false);
 
-    useEffect(() => {
-        const getCaptcha = async () => {
-            try {
-                const response = await axios.get(
-                    `http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/api/v1/account/register`
-                    );
-                setCodeId(response.data.id);
-                setImage(`data:image/png;base64,${response.data.image}`);
-            } catch (error) {
-                console.error(error); // здесь можно обработать ошибку
-            }
-        }
+    useEffect(() => {   
         getCaptcha();
     }, []);
 
     if (isRedirect) {
         return <Navigate to="/login" />;
+    }
+
+    const getCaptcha = async () => {
+        try {
+            const response = await axios.get(
+                `http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/api/v1/account/register`
+                );
+            setCodeId(response.data.id);
+            setImage(`data:image/png;base64,${response.data.image}`);
+        } catch (error) {
+            console.error(error); // здесь можно обработать ошибку
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -50,7 +52,7 @@ const Register = () => {
     };
 
     return (
-        <div className="register">
+        <div className="register-page">
             <h2 className="register__title form__title">Зарегистрируйтесь</h2>
             <form className="register__form" onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -110,7 +112,7 @@ const Register = () => {
                 </div>
                 <div>
                     {image !== '' && (
-                        <img src={image} alt="captcha" />
+                        <img src={image} alt="captcha" onClick={getCaptcha}/>
                     )}
                 </div>
                 <div className="form-group">
