@@ -2,14 +2,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
-    padding: 0 24px;
-    background-color: #f2f2f2;
+    height: 60px;
+    padding-left: 24px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 nav {
     display: flex;
-    gap: 24px;
 }
 
 nav a {

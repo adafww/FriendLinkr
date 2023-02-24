@@ -55,80 +55,78 @@ const Register = () => {
         <div className="register-page">
             <h2 className="register__title form__title">Зарегистрируйтесь</h2>
             <form className="register__form" onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div className="register__form-group">
                     <label htmlFor="register-email">Email</label>
                     <input
                         type="email"
-                        className="form-control"
+                        className="register__form-control"
                         id="register-email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="register__form-group">
                     <label htmlFor="register-firstPassword">Пароль</label>
                     <input
                         type="password"
-                        className="form-control"
+                        className="register__form-control"
                         id="register-firstPassword"
                         value={firstPassword}
                         onChange={(e) => setFirstPassword(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="register__form-group">
                     <label htmlFor="register-secondPassword">Подтверждение пароля</label>
                     <input
                         type="password"
-                        className="form-control"
+                        className="register__form-control"
                         id="register-secondPassword"
                         value={secondPassword}
                         onChange={(e) => setSecondPassword(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="register__form-group">
                     <label htmlFor="register-firstName">Имя</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className="register__form-control"
                         id="register-firstName"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="register__form-group">
                     <label htmlFor="register-lastName">Фамилия</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className="register__form-control"
                         id="register-lastName"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required
                     />
                 </div>
-                <div>
-                    {image !== '' && (
+                {image !== '' && (
                         <img src={image} alt="captcha" onClick={getCaptcha}/>
                     )}
-                </div>
-                <div className="form-group">
-                    <label htmlFor="register-code">Код</label>
+                <div className="register__form-group">
+                    <label htmlFor="register-code">Код с картинки</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className="register__form-control"
                         id="register-code"
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
                         required
                     />
                 </div>
-                <div className="login__action">
+                <div className="register__login__action">
                     <button type="submit" className="btn btn-primary">
-                        Войти
+                        Регистрация
                     </button>
                 </div>
             </form>

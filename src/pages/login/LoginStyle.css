@@ -1,4 +1,4 @@
-.register-page {
+.login__wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,7 +6,7 @@
     height: 100%;
 }
 
-.register__form {
+.login__form {
     width: 100%;
     max-width: 500px;
     display: flex;
@@ -18,17 +18,17 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.register__form-group {
+.login_form-group {
     width: 100%;
     margin-bottom: 1rem;
 }
 
-.register__form-group label{
+.login_form-group label {
     font-weight: bold;
     margin-bottom: 0.5rem;
 }
 
-.register__form-control {
+.login__form-control {
     width: 100%;
     padding: 0.5rem;
     font-size: 1rem;
@@ -37,10 +37,26 @@
     box-sizing: border-box;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 16px;
+.login__action {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.login__link {
+    color: #007bff;
+    text-decoration: none;
 }
 
 .btn {

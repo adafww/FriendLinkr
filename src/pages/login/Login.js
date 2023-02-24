@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import './LoginStyle.css';
 
 const Login = ({ onLogin }) => {
   const API_HOST = process.env.REACT_APP_API_HOST;
@@ -31,25 +32,25 @@ const Login = ({ onLogin }) => {
   }
 
   return (
-    <div className="login">
+    <div className="login__wrapper">
       <h2 className="login__title form__title">Войдите в аккаунт</h2>
       <form className="login__form" onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="login_form-group">
           <label htmlFor="login-email">Email</label>
           <input
             type="email"
-            className="form-control"
+            className="login__form-control"
             id="login-email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div className="form-group">
+        <div className="login_form-group">
           <label htmlFor="login-password">Пароль</label>
           <input
             type="password"
-            className="form-control"
+            className="login__form-control"
             id="login-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
