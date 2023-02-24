@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = () => {
-    const API_HOST = process.env.REACT_APP_API_HOST;
-    const API_PORT = process.env.REACT_APP_API_PORT;
     const [email, setEmail] = useState('');
     const [firstPassword, setFirstPassword] = useState('');
     const [secondPassword, setSecondPassword] = useState('');
@@ -12,29 +11,38 @@ const Register = () => {
     const [code, setCode] = useState('');
     const [codeId, setCodeId] = useState();
     const [image, setImage] = useState();
+    const [isRedirect, setIsRedirect] = useState(false);
 
     useEffect(() => {
         const getCaptcha = async () => {
             try {
-                const response = await axios.get('http://' + API_HOST + ':' +
-                    + API_PORT + '/api/v1/account/register');
-                        setCodeId(response.data.id);
-                        setImage(`data:image/png;base64,${response.data.image}`);
+                const response = await axios.get(
+                    `http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/api/v1/account/register`
+                    );
+                setCodeId(response.data.id);
+                setImage(`data:image/png;base64,${response.data.image}`);
             } catch (error) {
                 console.error(error); // здесь можно обработать ошибку
             }
         }
         getCaptcha();
     }, []);
-    
-    const handleSubmit = async (e) => {
 
+    if (isRedirect) {
+        return <Navigate to="/login" />;
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://' + API_HOST + ':' +
-                + API_PORT + '/api/v1/account/register', {
-                email, firstPassword, secondPassword, firstName, lastName, code, captcha_id: codeId
+            const response = await axios.post(
+                `http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/api/v1/account/register`
+                , {
+                email, passwd1: firstPassword, passwd2: secondPassword, firstName, lastName, code, captcha_id: codeId
             });
+            if (response.status === 200) {
+                setIsRedirect(true);
+              }
             console.log(response.data); // здесь можно обработать ответ от бэкэнда
         } catch (error) {
             console.error(error); // здесь можно обработать ошибку
